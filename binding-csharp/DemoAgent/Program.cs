@@ -14,18 +14,17 @@ namespace DemoAgent
             var environmentName = "CartPole-v0";
             var environmentId = await client.CreateEnvironment(environmentName);
 
-            Console.WriteLine($"Created environment with id: {environmentId}");
+            Console.WriteLine($"Created environment '{environmentName}' with id: {environmentId}");
 
             var actionSpace = await client.GetActionSpaceInfo(environmentId);
 
             Console.WriteLine("Action space:");
             Console.WriteLine(actionSpace);
 
-            // todo: server 500 bug when getting observation space
-//            var observationSpace = await client.GetObservationSpaceInfo(environmentId);
-//
-//            Console.WriteLine("Observation space:");
-//            Console.WriteLine(observationSpace);
+            var observationSpace = await client.GetObservationSpaceInfo(environmentId);
+
+            Console.WriteLine("Observation space:");
+            Console.WriteLine(observationSpace);
 
             // todo: monitor (see example python agent)
 
