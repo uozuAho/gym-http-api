@@ -20,6 +20,8 @@ namespace AiGym.Client
         /// </summary>
         Task<int> SampleActionSpace(string environmentId);
 
+        Task<object> Step(string environmentId, int action, bool render);
+
         Task<object> GetActionSpaceInfo(string environmentId);
         Task<object> GetObservationSpaceInfo(string environmentId);
     }

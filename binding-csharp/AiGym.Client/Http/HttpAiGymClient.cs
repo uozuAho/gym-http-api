@@ -32,6 +32,15 @@ namespace AiGym.Client.Http
             return response.action;
         }
 
+        public async Task<object> Step(string environmentId, int action, bool render)
+        {
+            var response = await _client.PostAsync<StepResponse>(
+                $"{_baseUrl}/v1/envs/{environmentId}/step",
+                new {action, render});
+
+            return response;
+        }
+
         public async Task<object> GetActionSpaceInfo(string environmentId)
         {
             var response = await _client.GetAsync<object>(

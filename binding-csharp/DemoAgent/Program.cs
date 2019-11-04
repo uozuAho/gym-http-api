@@ -29,7 +29,7 @@ namespace DemoAgent
             // todo: monitor (see example python agent)
 
             var episode_count = 1;
-            var max_steps = 1;
+            var max_steps = 2;
             var reward = 0;
 
             for (var i = 0; i < episode_count; i++)
@@ -45,7 +45,7 @@ namespace DemoAgent
                     var action = await client.SampleActionSpace(environmentId);
                     // todo: fix render
                     // ob, reward, done, _
-//                    var stepResult = client.Step(environmentId, action, render: false);
+                    var stepResult = await client.Step(environmentId, action, render: false);
 
 //                    if (stepResult.Done) break;
                     Console.WriteLine("asdf");
