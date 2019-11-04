@@ -16,30 +16,45 @@ namespace AiGym.Client.Http
 
         public async Task<TResponse> PostAsync<TResponse>(string uri)
         {
-            var response = await _httpClient.PostAsync(uri, null);
-            response.EnsureSuccessStatusCode();
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResponse>(responseContent);
+            var request = new HttpRequestMessage(HttpMethod.Post, uri);
+            var response = await ExecuteRequest(request);
+            return await DeserializeResponseContent<TResponse>(response);
         }
 
         public async Task<TResponse> PostAsync<TResponse>(string uri, object body)
         {
-            var bodyJson = JsonConvert.SerializeObject(body);
-            var requestContent = new StringContent(bodyJson, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = CreateRequestContent(body)
+            };
 
-            var response = await _httpClient.PostAsync(uri, requestContent);
-            response.EnsureSuccessStatusCode();
+            var response = await ExecuteRequest(request);
 
-            var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TResponse>(responseContent);
+            return await DeserializeResponseContent<TResponse>(response);
         }
 
         public async Task<TResponse> GetAsync<TResponse>(string uri)
         {
-            var response = await _httpClient.GetAsync(uri);
-            response.EnsureSuccessStatusCode();
+            var request = new HttpRequestMessage(HttpMethod.Get, uri);
+            var response = await ExecuteRequest(request);
+            return await DeserializeResponseContent<TResponse>(response);
+        }
 
+        private async Task<HttpResponseMessage> ExecuteRequest(HttpRequestMessage request)
+        {
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            return response;
+        }
+
+        private static StringContent CreateRequestContent(object body)
+        {
+            var bodyJson = JsonConvert.SerializeObject(body);
+            return new StringContent(bodyJson, Encoding.UTF8, "application/json");
+        }
+
+        private static async Task<TResponse> DeserializeResponseContent<TResponse>(HttpResponseMessage response)
+        {
             var responseContent = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<TResponse>(responseContent);
         }
