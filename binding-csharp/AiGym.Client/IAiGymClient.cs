@@ -15,6 +15,11 @@ namespace AiGym.Client
         /// </summary>
         Task<ISpace> ResetEnvironment(string environmentId);
 
+        /// <summary>
+        /// Get a random 'sample' of the action space (randomly chosen action)
+        /// </summary>
+        Task<int> SampleActionSpace(string environmentId);
+
         Task<object> GetActionSpaceInfo(string environmentId);
         Task<object> GetObservationSpaceInfo(string environmentId);
     }

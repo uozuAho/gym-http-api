@@ -24,6 +24,14 @@ namespace AiGym.Client.Http
             return response.instance_id;
         }
 
+        public async Task<int> SampleActionSpace(string environmentId)
+        {
+            var response = await _client.GetAsync<SampleActionSpaceResponse>(
+                $"{_baseUrl}/v1/envs/{environmentId}/action_space/sample");
+
+            return response.action;
+        }
+
         public async Task<object> GetActionSpaceInfo(string environmentId)
         {
             var response = await _client.GetAsync<object>(

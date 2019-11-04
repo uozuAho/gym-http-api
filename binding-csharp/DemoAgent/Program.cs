@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AiGym.Client;
 using AiGym.Client.Http;
-using AiGym.Client.Model;
 
 namespace DemoAgent
 {
@@ -41,15 +40,16 @@ namespace DemoAgent
 
                 Console.WriteLine($"environment state: {observation}");
 
-//                for (int j = 0; j < max_steps; j++)
-//                {
-//                    var action = client.SampleActionSpace(environmentId);
-//                    // todo: fix render
-//                    // ob, reward, done, _
+                for (var j = 0; j < max_steps; j++)
+                {
+                    var action = await client.SampleActionSpace(environmentId);
+                    // todo: fix render
+                    // ob, reward, done, _
 //                    var stepResult = client.Step(environmentId, action, render: false);
-//
+
 //                    if (stepResult.Done) break;
-//                }
+                    Console.WriteLine("asdf");
+                }
             }
         }
 
