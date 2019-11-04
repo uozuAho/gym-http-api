@@ -1,12 +1,9 @@
-﻿namespace AiGym.Client.Http.Messages
+﻿using System.Collections.Generic;
+
+namespace AiGym.Client.Http.Messages
 {
     internal class ResetEnvironmentResponse
     {
-        public ObservationMessage observation { get; set; }
-    }
-
-    internal class ObservationMessage
-    {
-
+        public List<double> observation { get; set; }
     }
 }

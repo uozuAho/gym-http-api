@@ -40,19 +40,14 @@ namespace AiGym.Client.Http
             return response;
         }
 
-        public async Task<Observation> ResetEnvironment(string environmentId)
+        public async Task<ISpace> ResetEnvironment(string environmentId)
         {
             var response = await _client.PostAsync<ResetEnvironmentResponse>(
                 $"{_baseUrl}/v1/envs/{environmentId}/reset");
 
-            var observation = MapToObservation(response.observation);
+            var observation = new BoxSpace {Values = response.observation};
 
             return observation;
-        }
-
-        private static Observation MapToObservation(ObservationMessage message)
-        {
-            return new Observation();
         }
     }
 }

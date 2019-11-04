@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AiGym.Client;
 using AiGym.Client.Http;
+using AiGym.Client.Model;
 
 namespace DemoAgent
 {
@@ -28,13 +29,17 @@ namespace DemoAgent
 
             // todo: monitor (see example python agent)
 
-//            var episode_count = 1;
-//            var max_steps = 1;
-//            var reward = 0;
-//
-//            for (int i = 0; i < episode_count; i++)
-//            {
-//                var observation = await client.ResetEnvironment(environmentId);
+            var episode_count = 1;
+            var max_steps = 1;
+            var reward = 0;
+
+            for (var i = 0; i < episode_count; i++)
+            {
+                Console.WriteLine("Resetting environment");
+
+                var observation = await client.ResetEnvironment(environmentId);
+
+                Console.WriteLine($"environment state: {observation}");
 
 //                for (int j = 0; j < max_steps; j++)
 //                {
@@ -45,7 +50,7 @@ namespace DemoAgent
 //
 //                    if (stepResult.Done) break;
 //                }
-//            }
+            }
         }
 
         private static IAiGymClient CreateClient()
