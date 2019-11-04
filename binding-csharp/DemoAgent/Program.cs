@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AiGym.Client;
+using AiGym.Client.Http;
 
 namespace DemoAgent
 {
@@ -8,8 +9,6 @@ namespace DemoAgent
     {
         public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             var client = CreateClient();
 
             var environmentName = "CartPole-v0";
