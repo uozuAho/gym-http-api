@@ -15,6 +15,38 @@ namespace DemoAgent
             var environmentId = await client.CreateEnvironment(environmentName);
 
             Console.WriteLine($"Created environment with id: {environmentId}");
+
+            var actionSpace = await client.GetActionSpaceInfo(environmentId);
+
+            Console.WriteLine("Action space:");
+            Console.WriteLine(actionSpace);
+
+            // todo: server 500 bug when getting observation space
+//            var observationSpace = await client.GetObservationSpaceInfo(environmentId);
+//
+//            Console.WriteLine("Observation space:");
+//            Console.WriteLine(observationSpace);
+
+            // todo: monitor (see example python agent)
+
+//            var episode_count = 1;
+//            var max_steps = 1;
+//            var reward = 0;
+//
+//            for (int i = 0; i < episode_count; i++)
+//            {
+//                var observation = await client.ResetEnvironment(environmentId);
+
+//                for (int j = 0; j < max_steps; j++)
+//                {
+//                    var action = client.SampleActionSpace(environmentId);
+//                    // todo: fix render
+//                    // ob, reward, done, _
+//                    var stepResult = client.Step(environmentId, action, render: false);
+//
+//                    if (stepResult.Done) break;
+//                }
+//            }
         }
 
         private static IAiGymClient CreateClient()
