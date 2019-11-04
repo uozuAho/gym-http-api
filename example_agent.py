@@ -50,4 +50,5 @@ if __name__ == '__main__':
         scoreboard. If this fails, you likely need to set
         os.environ['OPENAI_GYM_API_KEY']=<your_api_key>""")
 
-    client.upload(outdir)
+    # TODO: Server fails here. I don't care at this point.
+    # client.upload(outdir)
